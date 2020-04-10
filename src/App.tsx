@@ -1,5 +1,5 @@
 import Menu from './components/Menu';
-import Page from './pages/Page';
+import EntitiesListPage from './pages/nocode/EntitiesList';
 import React, { useState } from 'react';
 import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -23,6 +23,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Entity from './pages/nocode/Entity';
 
 const App: React.FC = () => {
 
@@ -34,11 +35,10 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <Menu selectedPage={selectedPage} />
           <IonRouterOutlet id="main">
-            <Route path="/page/:name" render={(props) => {
-              setSelectedPage(props.match.params.name);
-              return <Page {...props} />;
-            }} exact={true} />
-            <Route path="/" render={() => <Redirect to="/page/Inbox" />} exact={true} />
+            <Route path="/EntitiesList"        component={EntitiesListPage} />
+            <Route path="/nocode/EntitiesList" component={EntitiesListPage} />
+            <Route path="/nocode/Entity/:id"   component={Entity} />
+            <Route path="/" render={() => <Redirect to="/nocode/EntitiesList" />} exact={true} />
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
